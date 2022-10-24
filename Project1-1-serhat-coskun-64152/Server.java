@@ -75,7 +75,7 @@ public class Server {
 		        userInput = stdIn.readLine();
 		        out.println ( userInput );
 		        
-		        if (userInput.equals("See you")) {
+		        if (userInput.equals("exit")) {
 					System.out.println("Exitting the chat application!");
 			        System.exit(1);
 				}

@@ -12,6 +12,7 @@ public class Client {
 		 */
 		System.out.println("This is the client");
 		int port = -1;
+        String host;
 		if (args.length > 0) {
 		    try {
 		    	port = Integer.parseInt(args[0]);
@@ -19,11 +20,15 @@ public class Client {
 		        System.err.println("Argument" + args[0] + " must be an integer.");
 		        System.exit(1);
 		    }
+
+            host = args[1];
+
 		}else {
 			port = 9998;
+            host =  "localhost";
 		}			
 
-		String host =  "localhost";
+		
 		System.out.println("Binding to port localhost: " + port);
 
 		Socket echoSocket = null;
@@ -53,7 +58,7 @@ public class Client {
 		        userInput = stdIn.readLine();
 		        out.println ( userInput );
 		        
-		        if (userInput.equals("See you")) {
+		        if (userInput.equals("exit")) {
 					System.out.println("Exitting the chat application!");
 			        System.exit(1);
 				}
