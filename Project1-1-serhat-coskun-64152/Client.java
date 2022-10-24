@@ -70,6 +70,12 @@ public class Client {
 					System.out.println("Exitting the chat application!");
 			        System.exit(1);
 				}
+
+                if (recievedMessage.equals("timeout")) {
+					System.out.println("Can't send the message!");
+                    System.out.println("Server timedout because of idleness!");
+			        System.exit(1);
+				}
 			}
 	    }
 	    catch (Exception e) {

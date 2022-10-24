@@ -60,9 +60,6 @@ public class Server {
 	    catch (SocketTimeoutException e) {
 	    	System.out.println("Server timed out! Exitting!");
 	    	System.out.println(e.getMessage());
-			if (out != null) {
-				out.print("exit\n");
-			}
 	    	System.exit(1);
 	    }
 	    catch (Exception e) {
@@ -96,6 +93,14 @@ public class Server {
 		        
 			}
 	    }
+        catch (SocketTimeoutException e){
+        
+            System.out.println("Client did not send a message for " + timeout + " seconds.");
+            System.out.println("Timeout!");
+            out.println("timeout");
+            out.print("\n");
+	
+        }
 	    catch (Exception e) {
 			System.out.println("There is a problem with message transfer!");
 			System.out.println(e.getMessage());
