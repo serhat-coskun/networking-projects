@@ -41,6 +41,7 @@ public class Client {
 	    
 	    	echoSocket = new Socket (host, port);
 	    	System.out.println("Connected to server at remote adress " + echoSocket.getRemoteSocketAddress());
+            System.out.println("Timeout settings for client time: " + echoSocket.getSoTimeout());
             out = new PrintWriter ( echoSocket.getOutputStream (), true );
             in = new BufferedReader (new InputStreamReader ( echoSocket.getInputStream () ) );
             stdIn = new BufferedReader (new InputStreamReader ( System.in ));

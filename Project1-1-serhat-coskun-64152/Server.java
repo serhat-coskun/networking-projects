@@ -51,7 +51,9 @@ public class Server {
             serverSocket.setSoTimeout(timeout*1000);
 	        clientSocket = serverSocket.accept();
 			clientSocket.setSoTimeout(timeout*1000);
-	        System.out.println("Client accepted at remote adress " + clientSocket.getRemoteSocketAddress());            
+	        System.out.println("Client accepted at remote adress " + clientSocket.getRemoteSocketAddress());
+            System.out.println("Timeout settings for client response taking time: " + clientSocket.getSoTimeout());
+            System.out.println("Timeout settings for server not accepting any client: " + serverSocket.getSoTimeout());
 	        out = new PrintWriter(clientSocket.getOutputStream(), true);
 	        in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 	        stdIn = new BufferedReader (new InputStreamReader ( System.in ));
