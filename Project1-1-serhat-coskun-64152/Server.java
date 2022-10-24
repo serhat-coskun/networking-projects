@@ -10,7 +10,10 @@ public class Server {
          * Otherwise publish on port 9998
 		 */
 		System.out.println("This is the server");
-		int port = -1;
+		
+		int port = 9998;
+		int timeout = 3;
+
 		if (args.length > 0) { 
 		    try {
 		    	port = Integer.parseInt(args[0]);
@@ -18,8 +21,15 @@ public class Server {
 		        System.err.println("Argument" + args[0] + " must be an integer.");
 		        System.exit(1);
 		    }
-		}else {
-			port = 9998;
+
+			if (args.length == 2) {
+				try {
+					timeout = Integer.parseInt(args[1]);
+				} catch (NumberFormatException e) {
+					System.err.println("Argument" + args[1] + " must be an integer.");
+					System.exit(1);
+				}
+			}
 		}		
 		
 		
@@ -38,8 +48,9 @@ public class Server {
 	    try {
 	    
 			serverSocket = new ServerSocket(port);
-            serverSocket.setSoTimeout(3*1000);
+            serverSocket.setSoTimeout(timeout*1000);
 	        clientSocket = serverSocket.accept();
+			clientSocket.setSoTimeout(timeout*1000);
 	        System.out.println("Client accepted at remote adress " + clientSocket.getRemoteSocketAddress());            
 	        out = new PrintWriter(clientSocket.getOutputStream(), true);
 	        in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
@@ -49,6 +60,9 @@ public class Server {
 	    catch (SocketTimeoutException e) {
 	    	System.out.println("Server timed out! Exitting!");
 	    	System.out.println(e.getMessage());
+			if (out != null) {
+				out.print("exit\n");
+			}
 	    	System.exit(1);
 	    }
 	    catch (Exception e) {
